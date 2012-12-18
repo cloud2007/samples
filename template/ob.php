@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 require_once 'include.php';
-$name = 'dengjing';
+$name = 'laven';
 $id = '34';
 echo render('template', compact('name', 'id'));
 ?>
