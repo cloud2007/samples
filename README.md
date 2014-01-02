@@ -1,1 +1,1 @@
-this is my code for study!
+This's My Code For Study!

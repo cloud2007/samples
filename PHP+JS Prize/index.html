@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/jscript" src="jquery.min.js"></script>
+<style type="text/css">
+*{ font-family:"Courier New", Courier, monospace; font-size:14px;}
+#content{ width:500px; border:1px solid #da7c0c; margin:0 auto; text-align:center;}
+#show{ font-size:24px; color:#FF0000; font-weight:bold;}
+#end{ display:none;}
+
+.orange{
+color: #fef4e9;
+border: solid 1px #da7c0c;
+background: #f78d1d;
+background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+background: -moz-linear-gradient(top, #faa51a, #f47a20);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+}
+
+.button {
+display: inline-block;
+outline: none;
+cursor: pointer;
+text-align: center;
+text-decoration: none;
+font: 16px/100% 'Microsoft yahei',Arial, Helvetica, sans-serif;
+padding: .5em 2em .55em;
+text-shadow: 0 1px 1px rgba(0,0,0,.3);
+-webkit-border-radius: .5em;
+-moz-border-radius: .5em;
+border-radius: .5em;
+-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+box-shadow: 0 1px 2px rgba(0,0,0,.2);}
+</style>
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<div id="content">
+	<p id="show">click start</p>
+	<p><button id="start" class="button orange">start</button><button id="end" class="button orange">end</button></p>
+	<div id="result"></div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+$(function(){
+	var myrand;
+	$('#start').click(function(){
+		myrand = setInterval('getrand()',10);
+		$(this).hide();
+		$('#end').show();
+		
+	})
+	$('#end').click(function(){
+		clearInterval(myrand);
+		$(this).hide();
+		$('#start').show();
+		var result = $('#show').html();
+		$('#result').append('<p>' + result + '</p>');
+	})
+})
+
+function getrand(){
+	$.get("data.php", function(result){
+    	$("#show").html(result);
+	});
+}
+
+/*
+function getrand(){
+	$('#show').load('data.php');
+}
+*/
+
+/*
+function getrand(){
+	var data='rnd='+Math.random();
+	$.ajax({
+		url:'data.php',
+		type:'post',
+		data:data,
+		error:function(){},
+		success:function(msg){
+			if(msg!='error'){
+				$('#show').html(msg);
+			}else{
+				alert("抱歉,数据出错");
+			}
+		}
+	})
+}
+*/
+</script>
